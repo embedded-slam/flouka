@@ -25,13 +25,13 @@ endif
 all: test_flouka
 
 dependents:
-	-cd /home/SYSDSOFT/mgalal/Desktop/flouka_projects/flouka/build && $(MAKE) clean all
+	-cd /home/SYSDSOFT/mgalal/Desktop/flouka_linux/flouka/build && $(MAKE) clean all
 
 # Tool invocations
-test_flouka: $(OBJS) $(USER_OBJS) /home/SYSDSOFT/mgalal/Desktop/flouka_projects/flouka/build/libflouka.a
+test_flouka: $(OBJS) $(USER_OBJS) /home/SYSDSOFT/mgalal/Desktop/flouka_linux/flouka/build/libflouka.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -L"/home/SYSDSOFT/mgalal/Desktop/flouka_projects/flouka/build" -o"test_flouka" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -L"/home/SYSDSOFT/mgalal/Desktop/flouka_linux/flouka/build" -o"test_flouka" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -42,6 +42,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
-/home/SYSDSOFT/mgalal/Desktop/flouka_projects/flouka/build/libflouka.a:
+/home/SYSDSOFT/mgalal/Desktop/flouka_linux/flouka/build/libflouka.a:
 
 -include ../makefile.targets
