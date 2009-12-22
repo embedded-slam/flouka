@@ -2,7 +2,7 @@
  *
  * flouka - a library for embedded statistics collection.
  *
- * Copyright © 2009  Karim Emad Morsi, Mohamed Galal El-Din.
+ * Copyright ï¿½ 2009  Karim Emad Morsy, Mohamed Galal El-Din.
  *
  ***************************************************************************************************
  *
@@ -23,7 +23,7 @@
  *
  * For more information, questions, or inquiries please contact:
  *
- * Karim Emad Morsi:        karim.e.morsi@gmail.com
+ * Karim Emad Morsy:        karim.e.morsy@gmail.com
  * Mohamed Galal El-Din:    mohamed.g.ebrahim@gmail.com
  *
  **************************************************************************************************/
