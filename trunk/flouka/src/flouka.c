@@ -614,7 +614,7 @@ void flouka_assignGroup(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the group name pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != groupName_Ptr),
+    ASSERT(('\0' != groupName_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the group name pointer",
                     fileName,
                     lineNumber);
@@ -622,7 +622,7 @@ void flouka_assignGroup(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the group description pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != groupDescription_Ptr),
+    ASSERT(('\0' != groupDescription_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the group description pointer",
                     fileName,
                     lineNumber);
@@ -698,7 +698,7 @@ void flouka_assignSubGroup(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the sub group name pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != subgroupName_Ptr),
+    ASSERT(('\0' != subgroupName_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the sub group name pointer",
                     fileName,
                     lineNumber);
@@ -706,7 +706,7 @@ void flouka_assignSubGroup(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the sub group description pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != subgroupDescription_Ptr),
+    ASSERT(('\0' != subgroupDescription_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the sub group description pointer",
                     fileName,
                     lineNumber);
@@ -789,7 +789,7 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the counter name pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != counterName_Ptr),
+    ASSERT(('\0' != counterName_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the counter name pointer",
                     fileName,
                     lineNumber);
@@ -797,7 +797,7 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the counter description pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != counterDescription_Ptr),
+    ASSERT(('\0' != counterDescription_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the counter description pointer",
                     fileName,
                     lineNumber);
@@ -805,7 +805,7 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  NULL was passed as the counter unit pointer",
                     fileName,
                     lineNumber);
-    ASSERT(("" != unit_Ptr),
+    ASSERT(('\0' != unit_Ptr[0]),
                     "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the counter unit pointer",
                     fileName,
                     lineNumber);
