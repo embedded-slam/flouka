@@ -106,20 +106,6 @@ typedef struct flouka_StatisticsCounterInfo
 
 /***************************************************************************************************
  * Structure Name:
- * flouka_StatisticsInformationSizes_s
- *
- * Structure Description:
- * This structure holds all the information sized related to the statistics counter, this is an
- * internal structure that is used by the library function only.
- **************************************************************************************************/
-typedef struct flouka_StatisticsInformationSizes
-{
-    /*Holds the number of assigned counters*/
-    uint32_t assignedCountersCount;
-} flouka_StatisticsInformationSizes_s;
-
-/***************************************************************************************************
- * Structure Name:
  * flouka_StatisticsInformation_s
  *
  * Structure Description:
@@ -128,8 +114,8 @@ typedef struct flouka_StatisticsInformationSizes
  **************************************************************************************************/
 typedef struct flouka_StatisticsInformation
 {
-    /**/
-    flouka_StatisticsInformationSizes_s sizes;
+    /*Holds the number of assigned counters*/
+    uint32_t assignedCountersCount;
     /*Points to the list of counter information structures*/
     flouka_StatisticsCounterInfo_s* counterInfoList_Ptr;
 } flouka_StatisticsInformation_s;
@@ -211,7 +197,7 @@ void StatisticsInformation_serialize(flouka_StatisticsInformation_s* statisticsI
 
     uint32_t i;
 
-    FLOUKA_ENCODE_PARAMETER(serializationBuffer_Ptr, statisticsInfo_Ptr->sizes);
+    FLOUKA_ENCODE_PARAMETER(serializationBuffer_Ptr, statisticsInfo_Ptr->assignedCountersCount);
 
     for(i = 0; i < maxCountersCount; i++)
     {
@@ -227,7 +213,7 @@ uint32_t StatisticsInformation_getSerializedSize(flouka_StatisticsInformation_s*
     uint32_t i;
     uint32_t serializedSize = 0;
 
-    serializedSize += sizeof(statisticsInfo_Ptr->sizes.assignedCountersCount);
+    serializedSize += sizeof(statisticsInfo_Ptr->assignedCountersCount);
 
     for(i = 0; i < maxCountersCount; i++)
     {
@@ -312,7 +298,7 @@ flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
     esc_Ptr->information.counterInfoList_Ptr
                     = (flouka_StatisticsCounterInfo_s*) allocationFunction_Ptr(totalCountersCount
                                     * sizeof(*esc_Ptr->information.counterInfoList_Ptr));
-    esc_Ptr->information.sizes.assignedCountersCount = 0;
+    esc_Ptr->information.assignedCountersCount = 0;
 
     esc_Ptr->counterValuesList_Ptr = (uint32_t*) allocationFunction_Ptr(totalCountersCount
                     * sizeof(*esc_Ptr->counterValuesList_Ptr));
@@ -393,7 +379,7 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
-    ASSERT((flouka_Ptr->information.sizes.assignedCountersCount < flouka_Ptr->totalCountersCount),
+    ASSERT((flouka_Ptr->information.assignedCountersCount < flouka_Ptr->totalCountersCount),
                     "STATISTICS COLLECTOR:  Maximum number of counters exceeded initialized value",
                     fileName,
                     lineNumber);
@@ -452,7 +438,7 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
 #ifdef DEBUG
     flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned = TRUE;
 #endif /*DEBUG*/
-    flouka_Ptr->information.sizes.assignedCountersCount++;
+    flouka_Ptr->information.assignedCountersCount++;
 
     flouka_Ptr->unlockFunction_Ptr();
 }
@@ -463,7 +449,7 @@ uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FO
                     "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
-    ASSERT((flouka_Ptr->information.sizes.assignedCountersCount == flouka_Ptr->totalCountersCount),
+    ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
                     "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
@@ -488,7 +474,7 @@ void flouka_getInformation(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR: Information buffer allocated is smaller than expected)",
                     fileName,
                     lineNumber);
-    ASSERT((flouka_Ptr->information.sizes.assignedCountersCount == flouka_Ptr->totalCountersCount),
+    ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
                     "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
@@ -507,7 +493,7 @@ uint32_t flouka_getStatisticsSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR
                     "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
-    ASSERT((flouka_Ptr->information.sizes.assignedCountersCount == flouka_Ptr->totalCountersCount),
+    ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
                     "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
@@ -523,7 +509,7 @@ void flouka_getStatistics(flouka_s* flouka_Ptr,
                     "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
-    ASSERT((flouka_Ptr->information.sizes.assignedCountersCount == flouka_Ptr->totalCountersCount),
+    ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
                     "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
