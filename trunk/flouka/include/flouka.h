@@ -2,7 +2,7 @@
  *
  * flouka - a library for embedded statistics collection.
  *
- * Copyright © 2009  Mohamed Galal El-Din, Karim Emad Morsy.
+ * Copyright Â© 2009  Mohamed Galal El-Din, Karim Emad Morsy.
  *
  ***************************************************************************************************
  *
@@ -109,8 +109,6 @@ typedef void (*UnlockFuncPtr)();
  *  Name        : flouka_init
  *
  *  Arguments   : flouka_s**        flouka_Pointer_Ptr,
- *                uint32_t          totalGroupsCount,
- *                uint32_t          totalSubGroupsCount,
  *                uint32_t          totalCountersCount,
  *                AllocFuncPtr      allocationFunction_Ptr,
  *                DeallocFuncPtr    deallocationFunction_Ptr
@@ -123,8 +121,6 @@ typedef void (*UnlockFuncPtr)();
  *  Returns     : flouka_status_e
  **************************************************************************************************/
 flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
-                            uint32_t totalGroupsCount,
-                            uint32_t totalSubGroupsCount,
                             uint32_t totalCountersCount,
                             AllocFuncPtr allocationFunction_Ptr,
                             DeallocFuncPtr deallocationFunction_Ptr,
@@ -145,61 +141,10 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
- *  Name        : flouka_assignGroup
- *
- *  Arguments   : flouka_s*     flouka_Ptr,
- *                uint32_t                   groupID,
- *                const char*                groupName_Ptr,
- *                const char*                groupDescription_Ptr
- *
- *  Description : This function creates a new group, groups are used for organization purpose, for
- *                example, a protocol stack project may create 3 groups, one for the transmission
- *                path, another for the reception path, and a third for the control path
- *                statistics. This allows the presentation software (Web, GUI, Console) to
- *                categorize the different counters in groups.
- *
- *  Returns     : void
- **************************************************************************************************/
-void flouka_assignGroup(flouka_s* flouka_Ptr,
-                        uint32_t groupID,
-                        const char* groupName_Ptr,
-                        const char* groupDescription_Ptr COMMA()
-                                                     FILE_AND_LINE_FOR_TYPE());
-
-/***************************************************************************************************
- *  Name        : flouka_assignSubGroup
- *
- *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint32_t      subgroupID,
- *                uint32_t      groupID,
- *                const char*   subgroupName_Ptr,
- *                const char*   subgroupDescription_Ptr
- *
- *  Description : This function creates a new sub group, sub groups are used for a further level of
- *                organization purpose, for example, a protocol stack project may create 3 groups,
- *                one for the transmission path, another for the reception path, and a third for
- *                the control path statistics.
- *
- *                The developer might want to use transmission group for multiple transmitting
- *                connections, this is the role of each sub group, where each sub group will hold
- *                the counters of a specific connection, This allows the presentation software
- *                (Web, GUI, Console) to categorize the related counters in separate sub groups.
- *
- *  Returns     : void
- **************************************************************************************************/
-void flouka_assignSubGroup(flouka_s* flouka_Ptr,
-                           uint32_t subgroupID,
-                           uint32_t groupID,
-                           const char* subgroupName_Ptr,
-                           const char* subgroupDescription_Ptr COMMA()
-                                                     FILE_AND_LINE_FOR_TYPE());
-
-/***************************************************************************************************
  *  Name        : flouka_assignCounter
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
  *                uint32_t      counterID,
- *                uint32_t      subgroupID,
  *                const char*   counterName_Ptr,
  *                const char*   counterDescription_Ptr
  *
@@ -210,7 +155,6 @@ void flouka_assignSubGroup(flouka_s* flouka_Ptr,
  **************************************************************************************************/
 void flouka_assignCounter(flouka_s* flouka_Ptr,
                           uint32_t counterID,
-                          uint32_t subgroupID,
                           const char* unit_Ptr,
                           const char* counterName_Ptr,
                           const char* counterDescription_Ptr COMMA()
