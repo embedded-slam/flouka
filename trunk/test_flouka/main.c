@@ -2,7 +2,7 @@
  *
  * flouka - a library for embedded statistics collection.
  *
- * Copyright Â© 2009  Mohamed Galal El-Din, Karim Emad Morsy.
+ * Copyright © 2009  Mohamed Galal El-Din, Karim Emad Morsy.
  *
  ***************************************************************************************************
  *
@@ -214,13 +214,13 @@ void test_flouka()
             break;
         case 2:
             ASSERT(FALSE,
-                   "Client is expected to request the information first",
+                   "TEST FLOUKA: Client is expected to request the information first",
                    __FILE__,
                    __LINE__);
             break;
         default:
             ASSERT(FALSE,
-                   "Invalid request received!!!",
+                   "TEST FLOUKA: Invalid request received!!!",
                    __FILE__,
                    __LINE__);
 
@@ -252,7 +252,7 @@ void test_flouka()
             case 1:
                 printf("Information requested\n");
                 ASSERT(FALSE,
-                       "Client is expected to request the statistics",
+                       "TEST FLOUKA: Client is expected to request the statistics",
                        __FILE__,
                        __LINE__);
                 break;
@@ -273,7 +273,7 @@ void test_flouka()
                 break;
             default:
                 ASSERT(FALSE,
-                       "Invalid request received!!!",
+                       "TEST FLOUKA: Invalid request received!!!",
                        __FILE__,
                        __LINE__);
                 break;
