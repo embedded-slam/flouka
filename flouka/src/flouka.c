@@ -2,7 +2,7 @@
  *
  * flouka - a library for embedded statistics collection.
  *
- * Copyright Â© 2009  Mohamed Galal El-Din, Karim Emad Morsy.
+ * Copyright © 2009  Mohamed Galal El-Din, Karim Emad Morsy.
  *
  ***************************************************************************************************
  *
@@ -49,24 +49,24 @@
 /*This macro is used to verify that the statistics collector is initialized properly.*/
 #define FLOUKA_INITIALIZATION_PATTEREN    0x12341234
 /**************************************************************************************************/
-#define FLOUKA_ENCODE_PARAMETER(dest_Ptr, param)                                     \
+#define FLOUKA_ENCODE_PARAMETER(dest_Ptr, param)                                                   \
 {                                                                                                  \
     ASSERT((1 == sizeof(*dest_Ptr)),                                                               \
-           "STATISTICS COLLECTOR:  Invalid encoding pointer received, expected byte/char pointer", \
+           "FLOUKA:  Invalid encoding pointer received, expected byte/char pointer",               \
            __FILE__,                                                                               \
            __LINE__);                                                                              \
     memcpy((dest_Ptr), &(param), sizeof(param));                                                   \
     (dest_Ptr) += sizeof(param);                                                                   \
 }
 /**************************************************************************************************/
-#define FLOUKA_ENCODE_STRING(dest_Ptr, string_Ptr)                                   \
+#define FLOUKA_ENCODE_STRING(dest_Ptr, string_Ptr)                                                 \
 {                                                                                                  \
     ASSERT((1 == sizeof(*dest_Ptr)),                                                               \
-           "STATISTICS COLLECTOR:  Invalid encoding pointer received, expected byte/char pointer", \
+           "FLOUKA:  Invalid encoding pointer received, expected byte/char pointer",               \
            __FILE__,                                                                               \
            __LINE__);                                                                              \
     ASSERT((1 == sizeof(*string_Ptr)),                                                             \
-           "STATISTICS COLLECTOR:  Invalid string pointer received, expected byte/char pointer",   \
+           "FLOUKA:  Invalid string pointer received, expected byte/char pointer",                 \
            __FILE__,                                                                               \
            __LINE__);                                                                              \
     strcpy((char*)(dest_Ptr), (string_Ptr));                                                       \
@@ -252,27 +252,27 @@ flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
      * 6. Validate the unlock function pointer (not NULL).
      */
     ASSERT((NULL == *flouka_Pointer_Ptr),
-                    "STATISTICS COLLECTOR:  *flouka_Ptr pointer is not NULL, it is expected to initialize a NULL pointer",
+                    "FLOUKA:  *flouka_Ptr pointer is not NULL, it is expected to initialize a NULL pointer",
                     fileName,
                     lineNumber);
     ASSERT((totalCountersCount> 0),
-                    "STATISTICS COLLECTOR:  Total number of counters cannot be zero",
+                    "FLOUKA:  Total number of counters cannot be zero",
                     fileName,
                     lineNumber);
     ASSERT((NULL != allocationFunction_Ptr),
-                    "STATISTICS COLLECTOR:  allocation function cannot be NULL",
+                    "FLOUKA:  allocation function cannot be NULL",
                     fileName,
                     lineNumber);
     ASSERT((NULL != deallocationFunction_Ptr),
-                    "STATISTICS COLLECTOR:  deallocation function cannot be NULL",
+                    "FLOUKA:  deallocation function cannot be NULL",
                     fileName,
                     lineNumber);
     ASSERT((NULL != lockFunction_Ptr),
-                    "STATISTICS COLLECTOR:  lock function cannot be NULL",
+                    "FLOUKA:  lock function cannot be NULL",
                     fileName,
                     lineNumber);
     ASSERT((NULL != unlockFunction_Ptr),
-                    "STATISTICS COLLECTOR:  unlock function cannot be NULL",
+                    "FLOUKA:  unlock function cannot be NULL",
                     fileName,
                     lineNumber);
 
@@ -333,11 +333,11 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
      * 2. Validate the flouka_Ptr (already initialized).
      */
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((FLOUKA_INITIALIZATION_PATTEREN != flouka_Ptr->initializationPattern),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (either not initialized pointer, or incorrect, non-null pointer)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (either not initialized pointer, or incorrect, non-null pointer)",
                     fileName,
                     lineNumber);
     /*
@@ -376,43 +376,43 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
      * 10.Validate the unit_Ptr (non empty string ("")).
      */
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((flouka_Ptr->information.assignedCountersCount < flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR:  Maximum number of counters exceeded initialized value",
+                    "FLOUKA:  Maximum number of counters exceeded initialized value",
                     fileName,
                     lineNumber);
     ASSERT((counterID < flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR:  CounterID is outside of the range initialized",
+                    "FLOUKA:  CounterID is outside of the range initialized",
                     fileName,
                     lineNumber);
     ASSERT((FALSE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
-                    "STATISTICS COLLECTOR:  CounterID is already assigned",
+                    "FLOUKA:  CounterID is already assigned",
                     fileName,
                     lineNumber);
     ASSERT((NULL != counterName_Ptr),
-                    "STATISTICS COLLECTOR:  NULL was passed as the counter name pointer",
+                    "FLOUKA:  NULL was passed as the counter name pointer",
                     fileName,
                     lineNumber);
     ASSERT(('\0' != counterName_Ptr[0]),
-                    "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the counter name pointer",
+                    "FLOUKA:  Empty string (\"\") was passed as the counter name pointer",
                     fileName,
                     lineNumber);
     ASSERT((NULL != counterDescription_Ptr),
-                    "STATISTICS COLLECTOR:  NULL was passed as the counter description pointer",
+                    "FLOUKA:  NULL was passed as the counter description pointer",
                     fileName,
                     lineNumber);
     ASSERT(('\0' != counterDescription_Ptr[0]),
-                    "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the counter description pointer",
+                    "FLOUKA:  Empty string (\"\") was passed as the counter description pointer",
                     fileName,
                     lineNumber);
     ASSERT((NULL != unit_Ptr),
-                    "STATISTICS COLLECTOR:  NULL was passed as the counter unit pointer",
+                    "FLOUKA:  NULL was passed as the counter unit pointer",
                     fileName,
                     lineNumber);
     ASSERT(('\0' != unit_Ptr[0]),
-                    "STATISTICS COLLECTOR:  Empty string (\"\") was passed as the counter unit pointer",
+                    "FLOUKA:  Empty string (\"\") was passed as the counter unit pointer",
                     fileName,
                     lineNumber);
 
@@ -446,11 +446,11 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
 uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
+                    "FLOUKA: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
 
@@ -467,15 +467,15 @@ void flouka_getInformation(flouka_s* flouka_Ptr,
     infoSize = flouka_getInformationSize(flouka_Ptr COMMA() FILE_AND_LINE_FOR_CALL()) + LENGTH_HEADER_SIZE;
 
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((allocatedInfoBufferSize >= infoSize),
-                    "STATISTICS COLLECTOR: Information buffer allocated is smaller than expected)",
+                    "FLOUKA: Information buffer allocated is smaller than expected)",
                     fileName,
                     lineNumber);
     ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
+                    "FLOUKA: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
 
@@ -490,11 +490,11 @@ void flouka_getInformation(flouka_s* flouka_Ptr,
 uint32_t flouka_getStatisticsSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
+                    "FLOUKA: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
 
@@ -506,11 +506,11 @@ void flouka_getStatistics(flouka_s* flouka_Ptr,
                           uint32_t* statisticsBufferSize_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((flouka_Ptr->information.assignedCountersCount == flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR: assigned counters are less than the total, you have to assign all counters",
+                    "FLOUKA: assigned counters are less than the total, you have to assign all counters",
                     fileName,
                     lineNumber);
 
@@ -532,19 +532,19 @@ INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
      * 4. Validate the counter value (no overflow).
      */
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((counterID < flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR:  CounterID is outside of the range initialized",
+                    "FLOUKA:  CounterID is outside of the range initialized",
                     fileName,
                     lineNumber);
     ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
-                    "STATISTICS COLLECTOR:  CounterID is not assigned yet",
+                    "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
     ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] + 1) < UINT32_MAX),
-                    "STATISTICS COLLECTOR:  Counter reached the maximum possible value and will wrap around, comment this line if that is OK",
+                    "FLOUKA:  Counter reached the maximum possible value and will wrap around, comment this line if that is OK",
                     fileName,
                     lineNumber);
 
@@ -569,19 +569,19 @@ INLINE void flouka_updateCounter(flouka_s* flouka_Ptr,
      * 4. Validate the counter value (no overflow).
      */
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((counterID < flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR:  CounterID is outside of the range initialized" ,
+                    "FLOUKA:  CounterID is outside of the range initialized" ,
                     fileName,
                     lineNumber);
     ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
-                    "STATISTICS COLLECTOR:  CounterID is not assigned yet",
+                    "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
     ASSERT(((UINT32_MAX - flouka_Ptr->counterValuesList_Ptr[counterID])> delta),
-                    "STATISTICS COLLECTOR:  Overflow occurred and counter will wrap around, comment this line if that is OK",
+                    "FLOUKA:  Overflow occurred and counter will wrap around, comment this line if that is OK",
                     fileName,
                     lineNumber);
 
@@ -605,15 +605,15 @@ INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
      * 3. Validate the counter assignment status (assigned).
      */
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((counterID < flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR:  CounterID is outside of the range initialized",
+                    "FLOUKA:  CounterID is outside of the range initialized",
                     fileName,
                     lineNumber);
     ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
-                    "STATISTICS COLLECTOR:  CounterID is not assigned yet",
+                    "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
     /*
@@ -636,15 +636,15 @@ INLINE uint32_t flouka_getCounter(flouka_s* flouka_Ptr,
      * 3. Validate the counter assignment status (assigned).
      */
     ASSERT((NULL != flouka_Ptr),
-                    "STATISTICS COLLECTOR:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
                     fileName,
                     lineNumber);
     ASSERT((counterID < flouka_Ptr->totalCountersCount),
-                    "STATISTICS COLLECTOR:  CounterID is outside of the range initialized",
+                    "FLOUKA:  CounterID is outside of the range initialized",
                     fileName,
                     lineNumber);
     ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
-                    "STATISTICS COLLECTOR:  CounterID is not assigned yet",
+                    "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
     /*
