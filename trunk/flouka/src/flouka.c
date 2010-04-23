@@ -33,11 +33,11 @@
  *                                       I N C L U D E S
  *
  **************************************************************************************************/
-#include <unistd.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "flouka.h"
 
 /***************************************************************************************************
@@ -91,7 +91,7 @@
 typedef struct flouka_StatisticsCounterInfo
 {
     /*Unique integer identifier to identify the counter, and it is supplied by the user*/
-    uint32_t counterID;
+    uint32 counterID;
     /*The unit of the counter (ex. bytes, errors, N/A, etc...)*/
     const char* unit_Ptr;
     /*String representing the counter name*/
@@ -100,7 +100,7 @@ typedef struct flouka_StatisticsCounterInfo
     const char* counterDescription_Ptr;
 #ifdef DEBUG
     /*Indicates whether the counter has been assigned or not*/
-    bool_t isAssigned;
+    bool isAssigned;
 #endif /*DEBUG*/
 } flouka_StatisticsCounterInfo_s;
 
@@ -115,7 +115,7 @@ typedef struct flouka_StatisticsCounterInfo
 typedef struct flouka_StatisticsInformation
 {
     /*Holds the number of assigned counters*/
-    uint32_t assignedCountersCount;
+    uint32 assignedCountersCount;
     /*Points to the list of counter information structures*/
     flouka_StatisticsCounterInfo_s* counterInfoList_Ptr;
 } flouka_StatisticsInformation_s;
@@ -139,11 +139,11 @@ struct flouka
     /*Used to protect the object from multiple access during counter assignment only*/
     UnlockFuncPtr unlockFunction_Ptr;
     /*points to the list of counters*/
-    uint32_t* counterValuesList_Ptr;
+    uint32* counterValuesList_Ptr;
     /*Holds the total number of supported counters*/
-    uint32_t totalCountersCount;
+    uint32 totalCountersCount;
 #ifdef DEBUG
-    uint32_t initializationPattern;
+    uint32 initializationPattern;
 #endif /**/
 };
 
@@ -154,8 +154,8 @@ struct flouka
  **************************************************************************************************/
 
 
-uint8_t* StatisticsCounterInfo_serialize(flouka_StatisticsCounterInfo_s* counterInfo_Ptr,
-                                         uint8_t* serializationBuffer_Ptr)
+uint8* StatisticsCounterInfo_serialize(flouka_StatisticsCounterInfo_s* counterInfo_Ptr,
+                                         uint8* serializationBuffer_Ptr)
 {
     /*
      * Steps done in this function:
@@ -175,9 +175,9 @@ uint8_t* StatisticsCounterInfo_serialize(flouka_StatisticsCounterInfo_s* counter
     return (serializationBuffer_Ptr);
 }
 
-uint32_t StatisticsCounterInfo_getSerializedSize(flouka_StatisticsCounterInfo_s* counterInfo_Ptr)
+uint32 StatisticsCounterInfo_getSerializedSize(flouka_StatisticsCounterInfo_s* counterInfo_Ptr)
 {
-    uint32_t serializedSize = 0;
+    uint32 serializedSize = 0;
     /*
      * Steps done in this function:
      * ============================
@@ -191,11 +191,11 @@ uint32_t StatisticsCounterInfo_getSerializedSize(flouka_StatisticsCounterInfo_s*
 }
 
 void StatisticsInformation_serialize(flouka_StatisticsInformation_s* statisticsInfo_Ptr,
-                                     uint8_t* serializationBuffer_Ptr,
-                                     uint32_t maxCountersCount)
+                                     uint8* serializationBuffer_Ptr,
+                                     uint32 maxCountersCount)
 {
 
-    uint32_t i;
+    uint32 i;
 
     FLOUKA_ENCODE_PARAMETER(serializationBuffer_Ptr, statisticsInfo_Ptr->assignedCountersCount);
 
@@ -207,11 +207,11 @@ void StatisticsInformation_serialize(flouka_StatisticsInformation_s* statisticsI
     }
 }
 
-uint32_t StatisticsInformation_getSerializedSize(flouka_StatisticsInformation_s* statisticsInfo_Ptr,
-                                                 uint32_t maxCountersCount)
+uint32 StatisticsInformation_getSerializedSize(flouka_StatisticsInformation_s* statisticsInfo_Ptr,
+                                                 uint32 maxCountersCount)
 {
-    uint32_t i;
-    uint32_t serializedSize = 0;
+    uint32 i;
+    uint32 serializedSize = 0;
 
     serializedSize += sizeof(statisticsInfo_Ptr->assignedCountersCount);
 
@@ -230,13 +230,13 @@ uint32_t StatisticsInformation_getSerializedSize(flouka_StatisticsInformation_s*
  **************************************************************************************************/
 
 flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
-                            uint32_t totalCountersCount,
+                            uint32 totalCountersCount,
                             AllocFuncPtr allocationFunction_Ptr,
                             DeallocFuncPtr deallocationFunction_Ptr,
                             LockFuncPtr lockFunction_Ptr,
                             UnlockFuncPtr unlockFunction_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
-    uint32_t i;
+    uint32 i;
     flouka_s* esc_Ptr;
     flouka_status_e status;
 
@@ -300,7 +300,7 @@ flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
                                     * sizeof(*esc_Ptr->information.counterInfoList_Ptr));
     esc_Ptr->information.assignedCountersCount = 0;
 
-    esc_Ptr->counterValuesList_Ptr = (uint32_t*) allocationFunction_Ptr(totalCountersCount
+    esc_Ptr->counterValuesList_Ptr = (uint32*) allocationFunction_Ptr(totalCountersCount
                     * sizeof(*esc_Ptr->counterValuesList_Ptr));
     esc_Ptr->deallocationFunction_Ptr = deallocationFunction_Ptr;
     esc_Ptr->lockFunction_Ptr = lockFunction_Ptr;
@@ -356,7 +356,7 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 }
 
 void flouka_assignCounter(flouka_s* flouka_Ptr,
-                          uint32_t counterID,
+                          uint32 counterID,
                           const char* unit_Ptr,
                           const char* counterName_Ptr,
                           const char* counterDescription_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
@@ -443,7 +443,7 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
     flouka_Ptr->unlockFunction_Ptr();
 }
 
-uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
+uint32 flouka_getInformationSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     ASSERT((NULL != flouka_Ptr),
                     "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
@@ -459,10 +459,10 @@ uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FO
 }
 
 void flouka_getInformation(flouka_s* flouka_Ptr,
-                           uint8_t* informationBuffer_Ptr,
-                           uint32_t allocatedInfoBufferSize COMMA() FILE_AND_LINE_FOR_TYPE())
+                           uint8* informationBuffer_Ptr,
+                           uint32 allocatedInfoBufferSize COMMA() FILE_AND_LINE_FOR_TYPE())
 {
-    uint32_t infoSize;
+    uint32 infoSize;
 
     infoSize = flouka_getInformationSize(flouka_Ptr COMMA() FILE_AND_LINE_FOR_CALL()) + LENGTH_HEADER_SIZE;
 
@@ -487,7 +487,7 @@ void flouka_getInformation(flouka_s* flouka_Ptr,
 
 }
 
-uint32_t flouka_getStatisticsSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
+uint32 flouka_getStatisticsSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     ASSERT((NULL != flouka_Ptr),
                     "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
@@ -502,8 +502,8 @@ uint32_t flouka_getStatisticsSize(flouka_s* flouka_Ptr COMMA() FILE_AND_LINE_FOR
 }
 
 void flouka_getStatistics(flouka_s* flouka_Ptr,
-                          uint8_t** statisticsBufferPointer_Ptr,
-                          uint32_t* statisticsBufferSize_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
+                          uint8** statisticsBufferPointer_Ptr,
+                          uint32* statisticsBufferSize_Ptr COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     ASSERT((NULL != flouka_Ptr),
                     "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
@@ -517,11 +517,11 @@ void flouka_getStatistics(flouka_s* flouka_Ptr,
     *statisticsBufferSize_Ptr = (flouka_Ptr->totalCountersCount)
                     * (sizeof(*(flouka_Ptr->counterValuesList_Ptr)));
 
-    *statisticsBufferPointer_Ptr = (uint8_t*) flouka_Ptr->counterValuesList_Ptr;
+    *statisticsBufferPointer_Ptr = (uint8*) flouka_Ptr->counterValuesList_Ptr;
 }
 
 INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
-                                    uint32_t counterID COMMA() FILE_AND_LINE_FOR_TYPE())
+                                    uint32 counterID COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -557,7 +557,7 @@ INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
 }
 
 INLINE void flouka_decrementCounter(flouka_s*   flouka_Ptr,
-                                    uint32_t    counterID COMMA() FILE_AND_LINE_FOR_TYPE())
+                                    uint32    counterID COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -593,8 +593,8 @@ INLINE void flouka_decrementCounter(flouka_s*   flouka_Ptr,
 }
 
 INLINE void flouka_increaseCounter(flouka_s*    flouka_Ptr,
-                                   uint32_t     counterID,
-                                   uint32_t     delta COMMA() FILE_AND_LINE_FOR_TYPE())
+                                   uint32     counterID,
+                                   uint32     delta COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -630,8 +630,8 @@ INLINE void flouka_increaseCounter(flouka_s*    flouka_Ptr,
 }
 
 INLINE void flouka_decreaseCounter(flouka_s*    flouka_Ptr,
-                                   uint32_t     counterID,
-                                   uint32_t     delta COMMA() FILE_AND_LINE_FOR_TYPE())
+                                   uint32     counterID,
+                                   uint32     delta COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -667,8 +667,8 @@ INLINE void flouka_decreaseCounter(flouka_s*    flouka_Ptr,
 }
 
 INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
-                              uint32_t counterID,
-                              uint32_t value COMMA() FILE_AND_LINE_FOR_TYPE())
+                              uint32 counterID,
+                              uint32 value COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -699,7 +699,7 @@ INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
 }
 
 INLINE void flouka_resetCounter(flouka_s* flouka_Ptr,
-                                uint32_t counterID COMMA() FILE_AND_LINE_FOR_TYPE())
+                                uint32 counterID COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -728,8 +728,8 @@ INLINE void flouka_resetCounter(flouka_s* flouka_Ptr,
     flouka_Ptr->counterValuesList_Ptr[counterID] = UINT32_MIN;
 }
 
-INLINE uint32_t flouka_getCounter(flouka_s* flouka_Ptr,
-                                  uint32_t counterID COMMA() FILE_AND_LINE_FOR_TYPE())
+INLINE uint32 flouka_getCounter(flouka_s* flouka_Ptr,
+                                  uint32 counterID COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
