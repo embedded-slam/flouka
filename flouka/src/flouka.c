@@ -556,9 +556,45 @@ INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
     flouka_Ptr->counterValuesList_Ptr[counterID]++;
 }
 
-INLINE void flouka_updateCounter(flouka_s* flouka_Ptr,
-                                 uint32_t counterID,
-                                 uint32_t delta COMMA() FILE_AND_LINE_FOR_TYPE())
+INLINE void flouka_decrementCounter(flouka_s*   flouka_Ptr,
+                                    uint32_t    counterID COMMA() FILE_AND_LINE_FOR_TYPE())
+{
+    /*
+     * Assertions done in this function:
+     * =================================
+     * 1. Validate the flouka_Ptr (not NULL).
+     * 2. Validate the given counter ID (less than maximum).
+     * 3. Validate the counter assignment status (assigned).
+     * 4. Validate the counter value (no underflow).
+     */
+    ASSERT((NULL != flouka_Ptr),
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    fileName,
+                    lineNumber);
+    ASSERT((counterID < flouka_Ptr->totalCountersCount),
+                    "FLOUKA:  CounterID is outside of the range initialized",
+                    fileName,
+                    lineNumber);
+    ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
+                    "FLOUKA:  CounterID is not assigned yet",
+                    fileName,
+                    lineNumber);
+    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] - 1) > UINT32_MIN),
+                    "FLOUKA:  Counter reached the minimum possible value and will wrap around, comment this line if that is OK",
+                    fileName,
+                    lineNumber);
+
+    /*
+     * Steps done in this function:
+     * ============================
+     * 1. decrement the counter value by one.
+     */
+    flouka_Ptr->counterValuesList_Ptr[counterID]--;
+}
+
+INLINE void flouka_increaseCounter(flouka_s*    flouka_Ptr,
+                                   uint32_t     counterID,
+                                   uint32_t     delta COMMA() FILE_AND_LINE_FOR_TYPE())
 {
     /*
      * Assertions done in this function:
@@ -593,6 +629,43 @@ INLINE void flouka_updateCounter(flouka_s* flouka_Ptr,
     flouka_Ptr->counterValuesList_Ptr[counterID] += delta;
 }
 
+INLINE void flouka_decreaseCounter(flouka_s*    flouka_Ptr,
+                                   uint32_t     counterID,
+                                   uint32_t     delta COMMA() FILE_AND_LINE_FOR_TYPE())
+{
+    /*
+     * Assertions done in this function:
+     * =================================
+     * 1. Validate the flouka_Ptr (not NULL).
+     * 2. Validate the given counter ID (less than maximum).
+     * 3. Validate the counter assignment status (assigned).
+     * 4. Validate the counter value (no underflow).
+     */
+    ASSERT((NULL != flouka_Ptr),
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    fileName,
+                    lineNumber);
+    ASSERT((counterID < flouka_Ptr->totalCountersCount),
+                    "FLOUKA:  CounterID is outside of the range initialized" ,
+                    fileName,
+                    lineNumber);
+    ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
+                    "FLOUKA:  CounterID is not assigned yet",
+                    fileName,
+                    lineNumber);
+    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] - UINT32_MIN)> delta),
+                    "FLOUKA:  Underflow occurred and counter will wrap around, comment this line if that is OK",
+                    fileName,
+                    lineNumber);
+
+    /*
+     * Steps done in this function:
+     * ============================
+     * 1. Decrement the counter value by the given delta.
+     */
+    flouka_Ptr->counterValuesList_Ptr[counterID] -= delta;
+}
+
 INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
                               uint32_t counterID,
                               uint32_t value COMMA() FILE_AND_LINE_FOR_TYPE())
@@ -623,6 +696,36 @@ INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
      */
     flouka_Ptr->counterValuesList_Ptr[counterID] = value;
 
+}
+
+INLINE void flouka_resetCounter(flouka_s* flouka_Ptr,
+                                uint32_t counterID COMMA() FILE_AND_LINE_FOR_TYPE())
+{
+    /*
+     * Assertions done in this function:
+     * =================================
+     * 1. Validate the flouka_Ptr (not NULL).
+     * 2. Validate the given counter ID (less than maximum).
+     * 3. Validate the counter assignment status (assigned).
+     */
+    ASSERT((NULL != flouka_Ptr),
+                    "FLOUKA:  Invalid statistics counter pointer passed (NULL pointer passed)",
+                    fileName,
+                    lineNumber);
+    ASSERT((counterID < flouka_Ptr->totalCountersCount),
+                    "FLOUKA:  CounterID is outside of the range initialized",
+                    fileName,
+                    lineNumber);
+    ASSERT((TRUE == flouka_Ptr->information.counterInfoList_Ptr[counterID].isAssigned),
+                    "FLOUKA:  CounterID is not assigned yet",
+                    fileName,
+                    lineNumber);
+    /*
+     * Steps done in this function:
+     * ============================
+     * 1. Reset the counter.
+     */
+    flouka_Ptr->counterValuesList_Ptr[counterID] = UINT32_MIN;
 }
 
 INLINE uint32_t flouka_getCounter(flouka_s* flouka_Ptr,
