@@ -267,7 +267,7 @@ void test_flouka()
                  * Increment/update the counters.
                  */
                 FLOUKA_INCREMENT_COUNTER(COUNTER_ID_TRANSMISSION_FAILURE1);
-                FLOUKA_UPDATE_COUNTER(COUNTER_ID_TRANSMISSION_BYTES_COUNT1,
+                FLOUKA_INCREASE_COUNTER(COUNTER_ID_TRANSMISSION_BYTES_COUNT1,
                                       1000);
 
                 break;
