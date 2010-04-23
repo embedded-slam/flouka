@@ -103,10 +103,26 @@ extern flouka_s* g_flouka_Ptr;
                             FILE_AND_LINE_FOR_REF());                                              \
 }
 /**************************************************************************************************/
-#define FLOUKA_UPDATE_COUNTER(counterID,                                                           \
+#define FLOUKA_DECREMENT_COUNTER(counterID)                                                        \
+{                                                                                                  \
+    flouka_decrementCounter((g_flouka_Ptr),                                                        \
+                            (counterID) COMMA()                                                    \
+                            FILE_AND_LINE_FOR_REF());                                              \
+}
+/**************************************************************************************************/
+#define FLOUKA_INCREASE_COUNTER(counterID,                                                         \
                               delta)                                                               \
 {                                                                                                  \
-    flouka_updateCounter((g_flouka_Ptr),                                                           \
+    flouka_increaseCounter((g_flouka_Ptr),                                                         \
+                         (counterID),                                                              \
+                         (delta) COMMA()                                                           \
+                         FILE_AND_LINE_FOR_REF());                                                 \
+}
+/**************************************************************************************************/
+#define FLOUKA_DECREASE_COUNTER(counterID,                                                         \
+                              delta)                                                               \
+{                                                                                                  \
+    flouka_decreaseCounter((g_flouka_Ptr),                                                         \
                          (counterID),                                                              \
                          (delta) COMMA()                                                           \
                          FILE_AND_LINE_FOR_REF());                                                 \
@@ -119,6 +135,15 @@ extern flouka_s* g_flouka_Ptr;
                       (counterID),                                                                 \
                       (value) COMMA()                                                              \
                       FILE_AND_LINE_FOR_REF());                                                    \
+}
+/**************************************************************************************************/
+#define FLOUKA_RESET_COUNTER(counterID,                                                            \
+                             value)                                                                \
+{                                                                                                  \
+    flouka_resetCounter((g_flouka_Ptr),                                                            \
+                        (counterID),                                                               \
+                        (value) COMMA()                                                            \
+                        FILE_AND_LINE_FOR_REF());                                                  \
 }
 /**************************************************************************************************/
 #define FLOUKA_GET_COUNTER(counterID)                                                              \

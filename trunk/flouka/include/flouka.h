@@ -120,12 +120,12 @@ typedef void (*UnlockFuncPtr)();
  *
  *  Returns     : flouka_status_e
  **************************************************************************************************/
-flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
-                            uint32_t totalCountersCount,
-                            AllocFuncPtr allocationFunction_Ptr,
-                            DeallocFuncPtr deallocationFunction_Ptr,
-                            LockFuncPtr lockFunction_Ptr,
-                            UnlockFuncPtr unlockFunction_Ptr COMMA()
+flouka_status_e flouka_init(flouka_s**      flouka_Pointer_Ptr,
+                            uint32_t        totalCountersCount,
+                            AllocFuncPtr    allocationFunction_Ptr,
+                            DeallocFuncPtr  deallocationFunction_Ptr,
+                            LockFuncPtr     lockFunction_Ptr,
+                            UnlockFuncPtr   unlockFunction_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
@@ -143,7 +143,7 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA()
 /***************************************************************************************************
  *  Name        : flouka_assignCounter
  *
- *  Arguments   : flouka_s*    flouka_Ptr,
+ *  Arguments   : flouka_s*     flouka_Ptr,
  *                uint32_t      counterID,
  *                const char*   counterName_Ptr,
  *                const char*   counterDescription_Ptr
@@ -153,11 +153,11 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA()
  *
  *  Returns     : void
  **************************************************************************************************/
-void flouka_assignCounter(flouka_s* flouka_Ptr,
-                          uint32_t counterID,
-                          const char* unit_Ptr,
-                          const char* counterName_Ptr,
-                          const char* counterDescription_Ptr COMMA()
+void flouka_assignCounter(flouka_s*     flouka_Ptr,
+                          uint32_t      counterID,
+                          const char*   unit_Ptr,
+                          const char*   counterName_Ptr,
+                          const char*   counterDescription_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
@@ -176,7 +176,7 @@ uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA()
 /***************************************************************************************************
  *  Name        : flouka_getInformation
  *
- *  Arguments   : flouka_s*    flouka_Ptr,
+ *  Arguments   : flouka_s*     flouka_Ptr,
  *                uint8_t*      informationBuffer_Ptr,
  *                uint32_t      allocatedInfoBufferSize COMMA()
  *                FILE_AND_LINE_FOR_TYPE()
@@ -185,15 +185,15 @@ uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA()
  *
  *  Returns     : void
  **************************************************************************************************/
-void flouka_getInformation(flouka_s* flouka_Ptr,
-                           uint8_t* informationBuffer_Ptr,
-                           uint32_t allocatedInfoBufferSize COMMA()
+void flouka_getInformation(flouka_s*    flouka_Ptr,
+                           uint8_t*     informationBuffer_Ptr,
+                           uint32_t     allocatedInfoBufferSize COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
  *  Name        : flouka_getStatistics
  *
- *  Arguments   : flouka_s*    flouka_Ptr,
+ *  Arguments   : flouka_s*     flouka_Ptr,
  *                uint8_t**     statisticsBufferPointer_Ptr,
  *                uint32_t*     statisticsBufferSize_Ptr
  *
@@ -216,38 +216,67 @@ void flouka_getStatistics(flouka_s* flouka_Ptr,
 /***************************************************************************************************
  *  Name        : flouka_incrementCounter
  *
- *  Arguments   : flouka_s*    flouka_Ptr,
+ *  Arguments   : flouka_s*     flouka_Ptr,
  *                uint32_t      counterID
  *
- *  Description : This function increment the given counter by one.
+ *  Description : This function increments the given counter by one.
  *
  *  Returns     : void
  **************************************************************************************************/
-INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
-                                    uint32_t counterID COMMA()
+INLINE void flouka_incrementCounter(flouka_s*   flouka_Ptr,
+                                    uint32_t    counterID COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
-/*TODO: Shall delta be signed?*/
 /***************************************************************************************************
- *  Name        : flouka_updateCounter
+ *  Name        : flouka_decrementCounter
  *
- *  Arguments   : flouka_s*    flouka_Ptr,
+ *  Arguments   : flouka_s*     flouka_Ptr,
+ *                uint32_t      counterID
+ *
+ *  Description : This function decrements the given counter by one.
+ *
+ *  Returns     : void
+ **************************************************************************************************/
+INLINE void flouka_decrementCounter(flouka_s*   flouka_Ptr,
+                                    uint32_t    counterID COMMA()
+                                                     FILE_AND_LINE_FOR_TYPE());
+
+/***************************************************************************************************
+ *  Name        : flouka_increaseCounter
+ *
+ *  Arguments   : flouka_s*     flouka_Ptr,
  *                uint32_t      counterID,
  *                uint32_t      delta
  *
- *  Description : This function updates the given counter by the given value.
+ *  Description : This function increases the given counter by the given delta.
  *
  *  Returns     : void
  **************************************************************************************************/
-INLINE void flouka_updateCounter(flouka_s* flouka_Ptr,
-                                 uint32_t counterID,
-                                 uint32_t delta COMMA()
+INLINE void flouka_increaseCounter(flouka_s*    flouka_Ptr,
+                                   uint32_t     counterID,
+                                   uint32_t     delta COMMA()
+                                                     FILE_AND_LINE_FOR_TYPE());
+
+/***************************************************************************************************
+ *  Name        : flouka_decreaseCounter
+ *
+ *  Arguments   : flouka_s*     flouka_Ptr,
+ *                uint32_t      counterID,
+ *                uint32_t      delta
+ *
+ *  Description : This function decreases the given counter by the given delta.
+ *
+ *  Returns     : void
+ **************************************************************************************************/
+INLINE void flouka_decreaseCounter(flouka_s*    flouka_Ptr,
+                                   uint32_t     counterID,
+                                   uint32_t     delta COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
  *  Name        : flouka_setCounter
  *
- *  Arguments   : flouka_s*    flouka_Ptr,
+ *  Arguments   : flouka_s*     flouka_Ptr,
  *                uint32_t      counterID,
  *                uint32_t      value
  *
@@ -257,15 +286,30 @@ INLINE void flouka_updateCounter(flouka_s* flouka_Ptr,
  *  Returns     : void
  **************************************************************************************************/
 INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
-                              uint32_t counterID,
-                              uint32_t value COMMA()
+                              uint32_t  counterID,
+                              uint32_t  value COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
-/*TODO: Shall counter be signed?*/
+
+/***************************************************************************************************
+ *  Name        : flouka_resetCounter
+ *
+ *  Arguments   : flouka_s*    flouka_Ptr,
+ *                uint32_t     counterID,
+ *                uint32_t     value
+ *
+ *  Description : This function resets the given counter to zero.
+ *
+ *  Returns     : void
+ **************************************************************************************************/
+INLINE void flouka_resetCounter(flouka_s*   flouka_Ptr,
+                                uint32_t    counterID COMMA()
+                                                     FILE_AND_LINE_FOR_TYPE());
+
 /***************************************************************************************************
  *  Name        : flouka_getCounter
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint32_t      counterID
+ *                uint32_t     counterID
  *
  *  Description : This function return the current value of the given counter.
  *
