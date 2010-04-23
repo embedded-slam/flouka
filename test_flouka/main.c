@@ -63,7 +63,7 @@ int main()
      * Create the statistics counter.
      */
 
-    FLOUKA_INIT((uint32_t)COUNTER_ID_COUNT,     /*Number of counters*/
+    FLOUKA_INIT((uint32)COUNTER_ID_COUNT,     /*Number of counters*/
                 alloc,                          /*Allocation function*/
                 free,                           /*Deallocation function*/
                 lock,                           /*Locking function*/
@@ -72,27 +72,27 @@ int main()
     /*
      * Assign the counter(s)
      */
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_FAILURE1,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_FAILURE1,
                           "TX Failure(s)",
                           "# Transmission failure",
                           "This counter represents the number of transmission failure");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_BYTES_COUNT1,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_BYTES_COUNT1,
                           "Byte(s)",
                           "# Bytes transmitted",
                           "This counter represents the number of bytes transmitted");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_FAILURE2,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_FAILURE2,
                           "TX Failure(s)",
                           "# Transmission failure",
                           "This counter represents the number of transmission failure");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_BYTES_COUNT2,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_BYTES_COUNT2,
                           "Byte(s)",
                           "# Bytes transmitted",
                           "This counter represents the number of bytes transmitted");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_RECEPTION_BYTES_COUNT1,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_RECEPTION_BYTES_COUNT1,
                           "Byte(s)",
                           "# Bytes received",
                           "This counter represents the number of bytes received");
@@ -141,13 +141,13 @@ void test_flouka()
     socklen_t           clientAddressLength;
     struct  sockaddr_in clientAddress;
     struct  sockaddr_in serverAddress;
-    uint8_t             request;
-    uint8_t*            informationBuffer_Ptr;
-    uint32_t            informationBufferSize;
-    uint8_t*            statisticsBuffer_Ptr;
-    uint32_t            statisticsBufferSize;
+    uint8             request;
+    uint8*            informationBuffer_Ptr;
+    uint32            informationBufferSize;
+    uint8*            statisticsBuffer_Ptr;
+    uint32            statisticsBufferSize;
     int32_t             status;
-    uint16_t            listenPort;
+    uint16            listenPort;
 
     listenPort = 4444;
 
@@ -196,7 +196,7 @@ void test_flouka()
         case 1:
             printf("Information requested\n");
             informationBufferSize = FLOUKA_GET_INFORMATIOM_SIZE();
-            informationBuffer_Ptr = (uint8_t*) malloc(informationBufferSize);
+            informationBuffer_Ptr = (uint8*) malloc(informationBufferSize);
 
 
             FLOUKA_GET_INFORMATION(informationBuffer_Ptr,
