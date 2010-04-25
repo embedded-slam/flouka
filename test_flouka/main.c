@@ -79,9 +79,9 @@ int main()
      * Create the statistics counter.
      */
 
-    FLOUKA_INIT((uint32_t)GROUP_ID_COUNT,       /*Number of groups*/
-                (uint32_t)SUB_GROUP_ID_COUNT,   /*Number of sub groups*/
-                (uint32_t)COUNTER_ID_COUNT,     /*Number of counters*/
+    FLOUKA_INIT((uint32)GROUP_ID_COUNT,       /*Number of groups*/
+                (uint32)SUB_GROUP_ID_COUNT,   /*Number of sub groups*/
+                (uint32)COUNTER_ID_COUNT,     /*Number of counters*/
                 alloc,                          /*Allocation function*/
                 free,                           /*Deallocation function*/
                 lock,                           /*Locking function*/
@@ -90,61 +90,61 @@ int main()
     /*
      * Assign the group(s).
      */
-    FLOUKA_ASSIGN_GROUP((uint32_t) GROUP_ID_TRANSMISSION,
+    FLOUKA_ASSIGN_GROUP((uint32) GROUP_ID_TRANSMISSION,
                         "Transmission",
                         "This group collects all the counters associated with the transmission path");
 
-    FLOUKA_ASSIGN_GROUP((uint32_t) GROUP_ID_RECEPTION,
+    FLOUKA_ASSIGN_GROUP((uint32) GROUP_ID_RECEPTION,
                         "Reception",
                         "This group collects all the counters associated with the reception path");
 
     /*
      * Assign the sub group(s).
      */
-    FLOUKA_ASSIGN_SUB_GROUP((uint32_t) SUB_GROUP_ID_TX_CONNECTION1,
-                            (uint32_t) GROUP_ID_TRANSMISSION,
+    FLOUKA_ASSIGN_SUB_GROUP((uint32) SUB_GROUP_ID_TX_CONNECTION1,
+                            (uint32) GROUP_ID_TRANSMISSION,
                             "Transmission Connection 1",
                             "This sub group collects all the counters associated with the transmission path for connection 1");
 
-    FLOUKA_ASSIGN_SUB_GROUP((uint32_t) SUB_GROUP_ID_TX_CONNECTION2,
-                            (uint32_t) GROUP_ID_TRANSMISSION,
+    FLOUKA_ASSIGN_SUB_GROUP((uint32) SUB_GROUP_ID_TX_CONNECTION2,
+                            (uint32) GROUP_ID_TRANSMISSION,
                             "Transmission Connection 2",
                             "This sub group collects all the counters associated with the transmission path for connection 2");
 
-    FLOUKA_ASSIGN_SUB_GROUP((uint32_t) SUB_GROUP_ID_RX_CONNECTION1,
-                            (uint32_t) GROUP_ID_RECEPTION,
+    FLOUKA_ASSIGN_SUB_GROUP((uint32) SUB_GROUP_ID_RX_CONNECTION1,
+                            (uint32) GROUP_ID_RECEPTION,
                             "Reception Connection 2",
                             "This sub group collects all the counters associated with the reception path for connection 1");
 
     /*
      * Assign the counter(s)
      */
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_FAILURE1,
-                          (uint32_t) SUB_GROUP_ID_TX_CONNECTION1,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_FAILURE1,
+                          (uint32) SUB_GROUP_ID_TX_CONNECTION1,
                           "TX Failure(s)",
                           "# Transmission failure",
                           "This counter represents the number of transmission failure");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_BYTES_COUNT1,
-                          (uint32_t) SUB_GROUP_ID_TX_CONNECTION1,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_BYTES_COUNT1,
+                          (uint32) SUB_GROUP_ID_TX_CONNECTION1,
                           "Byte(s)",
                           "# Bytes transmitted",
                           "This counter represents the number of bytes transmitted");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_FAILURE2,
-                          (uint32_t) SUB_GROUP_ID_TX_CONNECTION2,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_FAILURE2,
+                          (uint32) SUB_GROUP_ID_TX_CONNECTION2,
                           "TX Failure(s)",
                           "# Transmission failure",
                           "This counter represents the number of transmission failure");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_TRANSMISSION_BYTES_COUNT2,
-                          (uint32_t) SUB_GROUP_ID_TX_CONNECTION2,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_TRANSMISSION_BYTES_COUNT2,
+                          (uint32) SUB_GROUP_ID_TX_CONNECTION2,
                           "Byte(s)",
                           "# Bytes transmitted",
                           "This counter represents the number of bytes transmitted");
 
-    FLOUKA_ASSIGN_COUNTER((uint32_t) COUNTER_ID_RECEPTION_BYTES_COUNT1,
-                          (uint32_t) SUB_GROUP_ID_RX_CONNECTION1,
+    FLOUKA_ASSIGN_COUNTER((uint32) COUNTER_ID_RECEPTION_BYTES_COUNT1,
+                          (uint32) SUB_GROUP_ID_RX_CONNECTION1,
                           "Byte(s)",
                           "# Bytes received",
                           "This counter represents the number of bytes received");
@@ -193,13 +193,13 @@ void test_flouka()
     socklen_t           clientAddressLength;
     struct  sockaddr_in clientAddress;
     struct  sockaddr_in serverAddress;
-    uint8_t             request;
-    uint8_t*            informationBuffer_Ptr;
-    uint32_t            informationBufferSize;
-    uint8_t*            statisticsBuffer_Ptr;
-    uint32_t            statisticsBufferSize;
+    uint8             request;
+    uint8*            informationBuffer_Ptr;
+    uint32            informationBufferSize;
+    uint8*            statisticsBuffer_Ptr;
+    uint32            statisticsBufferSize;
     int32_t             status;
-    uint16_t            listenPort;
+    uint16            listenPort;
 
     listenPort = 4444;
 
@@ -248,7 +248,7 @@ void test_flouka()
         case 1:
             printf("Information requested\n");
             informationBufferSize = FLOUKA_GET_INFORMATIOM_SIZE();
-            informationBuffer_Ptr = (uint8_t*) malloc(informationBufferSize);
+            informationBuffer_Ptr = (uint8*) malloc(informationBufferSize);
 
 
             FLOUKA_GET_INFORMATION(informationBuffer_Ptr,

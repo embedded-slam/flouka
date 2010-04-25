@@ -25,7 +25,7 @@ endif
 all: test_flouka
 
 dependents:
-	-cd C:/Documents\ and\ Settings/mgalal/workspace/flouka/build && $(MAKE) clean all
+	-cd C:/Documents\ and\ Settings/mgalal/workspace/flouka/build && $(MAKE) all
 
 # Tool invocations
 test_flouka: $(OBJS) $(USER_OBJS) C:/Documents\ and\ Settings/mgalal/workspace/flouka/build/libflouka.a
