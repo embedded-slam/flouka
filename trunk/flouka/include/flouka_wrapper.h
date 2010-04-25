@@ -53,7 +53,7 @@ extern flouka_s* g_flouka_Ptr;
                          FILE_AND_LINE_FOR_REF());                                                 \
                                                                                                    \
     ASSERT((FLOUKA_STATUS_SUCCESS == status),                                                      \
-           "STATISTICS COLLECTOR: Failed to create the object object",                             \
+           "FLOUKA: Failed to create the object object",                             \
            __FILE__,                                                                               \
            __LINE__);                                                                              \
 }

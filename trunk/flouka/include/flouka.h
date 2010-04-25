@@ -50,9 +50,9 @@ typedef void (*UnlockFuncPtr)();
  *  Name        : flouka_init
  *
  *  Arguments   : flouka_s**        flouka_Pointer_Ptr,
- *                uint32_t          totalGroupsCount,
- *                uint32_t          totalSubGroupsCount,
- *                uint32_t          totalCountersCount,
+ *                uint32          totalGroupsCount,
+ *                uint32          totalSubGroupsCount,
+ *                uint32          totalCountersCount,
  *                AllocFuncPtr      allocationFunction_Ptr,
  *                DeallocFuncPtr    deallocationFunction_Ptr
  *                LockFuncPtr       lockFunction_Ptr
@@ -64,9 +64,9 @@ typedef void (*UnlockFuncPtr)();
  *  Returns     : flouka_status_e
  **************************************************************************************************/
 flouka_status_e flouka_init(flouka_s** flouka_Pointer_Ptr,
-                            uint32_t totalGroupsCount,
-                            uint32_t totalSubGroupsCount,
-                            uint32_t totalCountersCount,
+                            uint32 totalGroupsCount,
+                            uint32 totalSubGroupsCount,
+                            uint32 totalCountersCount,
                             AllocFuncPtr allocationFunction_Ptr,
                             DeallocFuncPtr deallocationFunction_Ptr,
                             LockFuncPtr lockFunction_Ptr,
@@ -89,7 +89,7 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA()
  *  Name        : flouka_assignGroup
  *
  *  Arguments   : flouka_s*     flouka_Ptr,
- *                uint32_t                   groupID,
+ *                uint32                   groupID,
  *                const char*                groupName_Ptr,
  *                const char*                groupDescription_Ptr
  *
@@ -102,7 +102,7 @@ void flouka_destroy(flouka_s* flouka_Ptr COMMA()
  *  Returns     : void
  **************************************************************************************************/
 void flouka_assignGroup(flouka_s* flouka_Ptr,
-                        uint32_t groupID,
+                        uint32 groupID,
                         const char* groupName_Ptr,
                         const char* groupDescription_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
@@ -111,8 +111,8 @@ void flouka_assignGroup(flouka_s* flouka_Ptr,
  *  Name        : flouka_assignSubGroup
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint32_t      subgroupID,
- *                uint32_t      groupID,
+ *                uint32      subgroupID,
+ *                uint32      groupID,
  *                const char*   subgroupName_Ptr,
  *                const char*   subgroupDescription_Ptr
  *
@@ -129,8 +129,8 @@ void flouka_assignGroup(flouka_s* flouka_Ptr,
  *  Returns     : void
  **************************************************************************************************/
 void flouka_assignSubGroup(flouka_s* flouka_Ptr,
-                           uint32_t subgroupID,
-                           uint32_t groupID,
+                           uint32 subgroupID,
+                           uint32 groupID,
                            const char* subgroupName_Ptr,
                            const char* subgroupDescription_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
@@ -139,8 +139,8 @@ void flouka_assignSubGroup(flouka_s* flouka_Ptr,
  *  Name        : flouka_assignCounter
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint32_t      counterID,
- *                uint32_t      subgroupID,
+ *                uint32      counterID,
+ *                uint32      subgroupID,
  *                const char*   counterName_Ptr,
  *                const char*   counterDescription_Ptr
  *
@@ -150,8 +150,8 @@ void flouka_assignSubGroup(flouka_s* flouka_Ptr,
  *  Returns     : void
  **************************************************************************************************/
 void flouka_assignCounter(flouka_s* flouka_Ptr,
-                          uint32_t counterID,
-                          uint32_t subgroupID,
+                          uint32 counterID,
+                          uint32 subgroupID,
                           const char* unit_Ptr,
                           const char* counterName_Ptr,
                           const char* counterDescription_Ptr COMMA()
@@ -165,17 +165,17 @@ void flouka_assignCounter(flouka_s* flouka_Ptr,
  *  Description : This function returns the size of the buffer which needs to be allocated for
  *                serializing the Statistics setup info.
  *
- *  Returns     : uint32_t
+ *  Returns     : uint32
  **************************************************************************************************/
-uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA()
+uint32 flouka_getInformationSize(flouka_s* flouka_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
  *  Name        : flouka_getInformation
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint8_t*      informationBuffer_Ptr,
- *                uint32_t      allocatedInfoBufferSize COMMA()
+ *                uint8*      informationBuffer_Ptr,
+ *                uint32      allocatedInfoBufferSize COMMA()
  *                FILE_AND_LINE_FOR_TYPE()
  *
  *  Description : This function fills the infoBuffer with the statistics setup information.
@@ -183,16 +183,16 @@ uint32_t flouka_getInformationSize(flouka_s* flouka_Ptr COMMA()
  *  Returns     : void
  **************************************************************************************************/
 void flouka_getInformation(flouka_s* flouka_Ptr,
-                           uint8_t* informationBuffer_Ptr,
-                           uint32_t allocatedInfoBufferSize COMMA()
+                           uint8* informationBuffer_Ptr,
+                           uint32 allocatedInfoBufferSize COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
  *  Name        : flouka_getStatistics
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint8_t**     statisticsBufferPointer_Ptr,
- *                uint32_t*     statisticsBufferSize_Ptr
+ *                uint8**     statisticsBufferPointer_Ptr,
+ *                uint32*     statisticsBufferSize_Ptr
  *
  *  Description : This function returns two output argument, one is a pointer to the the statistics
  *                buffer to be sent as is to the UI, and the other is the length of the statistics
@@ -206,22 +206,22 @@ void flouka_getInformation(flouka_s* flouka_Ptr,
  *  Returns     : void
  **************************************************************************************************/
 void flouka_getStatistics(flouka_s* flouka_Ptr,
-                          uint8_t** statisticsBufferPointer_Ptr,
-                          uint32_t* statisticsBufferSize_Ptr COMMA()
+                          uint8** statisticsBufferPointer_Ptr,
+                          uint32* statisticsBufferSize_Ptr COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
  *  Name        : flouka_incrementCounter
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint32_t      counterID
+ *                uint32      counterID
  *
  *  Description : This function increment the given counter by one.
  *
  *  Returns     : void
  **************************************************************************************************/
 INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
-                                    uint32_t counterID COMMA()
+                                    uint32 counterID COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
@@ -283,8 +283,8 @@ INLINE void flouka_decreaseCounter(flouka_s*    flouka_Ptr,
  *  Returns     : void
  **************************************************************************************************/
 INLINE void flouka_setCounter(flouka_s* flouka_Ptr,
-                              uint32_t counterID,
-                              uint32_t value COMMA()
+                              uint32 counterID,
+                              uint32 value COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 /***************************************************************************************************
@@ -306,14 +306,14 @@ INLINE void flouka_resetCounter(flouka_s*   flouka_Ptr,
  *  Name        : flouka_getCounter
  *
  *  Arguments   : flouka_s*    flouka_Ptr,
- *                uint32_t      counterID
+ *                uint32      counterID
  *
  *  Description : This function return the current value of the given counter.
  *
  *  Returns     : void
  **************************************************************************************************/
-INLINE uint32_t flouka_getCounter(flouka_s* flouka_Ptr,
-                                  uint32_t counterID COMMA()
+INLINE uint32 flouka_getCounter(flouka_s* flouka_Ptr,
+                                  uint32 counterID COMMA()
                                                      FILE_AND_LINE_FOR_TYPE());
 
 #endif /* FLOUKA_H_ */
