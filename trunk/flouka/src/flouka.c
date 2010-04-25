@@ -2,7 +2,7 @@
  *
  * flouka - a library for embedded statistics collection.
  *
- * Copyright ï¿½ 2009  Mohamed Galal El-Din, Karim Emad Morsy.
+ * Copyright © 2009  Mohamed Galal El-Din, Karim Emad Morsy.
  *
  ***************************************************************************************************
  *
