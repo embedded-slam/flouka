@@ -33,7 +33,9 @@
 extern flouka_s* g_flouka_Ptr;
 
 /**************************************************************************************************/
-#define FLOUKA_INIT(maxCountersCount,                                                              \
+#define FLOUKA_INIT(maxGroupsCount,                                                                \
+                    maxSubGroupsCount,                                                             \
+                    maxCountersCount,                                                              \
                     allocationFunction_Ptr,                                                        \
                     deallocationFunction_Ptr,                                                      \
                     lockFunction_Ptr,                                                              \
@@ -41,6 +43,8 @@ extern flouka_s* g_flouka_Ptr;
 {                                                                                                  \
     flouka_status_e status;                                                                        \
     status = flouka_init(&(g_flouka_Ptr),                                                          \
+                         (maxGroupsCount),                                                         \
+                         (maxSubGroupsCount),                                                      \
                          (maxCountersCount),                                                       \
                          (allocationFunction_Ptr),                                                 \
                          (deallocationFunction_Ptr),                                               \
@@ -60,13 +64,39 @@ extern flouka_s* g_flouka_Ptr;
                     FILE_AND_LINE_FOR_REF());                                                      \
 }
 /**************************************************************************************************/
+#define FLOUKA_ASSIGN_GROUP(groupID,                                                               \
+                            groupName_Ptr,                                                         \
+                            groupDescription_Ptr)                                                  \
+{                                                                                                  \
+    flouka_assignGroup((g_flouka_Ptr),                                                             \
+                       (groupID),                                                                  \
+                       (groupName_Ptr),                                                            \
+                       (groupDescription_Ptr) COMMA()                                              \
+                       FILE_AND_LINE_FOR_REF());                                                   \
+}
+/**************************************************************************************************/
+#define FLOUKA_ASSIGN_SUB_GROUP(subgroupID,                                                        \
+                                groupID,                                                           \
+                                subgroupName_Ptr,                                                  \
+                                subgroupDescription_Ptr)                                           \
+{                                                                                                  \
+    flouka_assignSubGroup((g_flouka_Ptr),                                                          \
+                          (subgroupID),                                                            \
+                          (groupID),                                                               \
+                          (subgroupName_Ptr),                                                      \
+                          (subgroupDescription_Ptr) COMMA()                                        \
+                          FILE_AND_LINE_FOR_REF());                                                \
+}
+/**************************************************************************************************/
 #define FLOUKA_ASSIGN_COUNTER(counterID,                                                           \
+                              groupID,                                                             \
                               unit_Ptr,                                                            \
                               counterName_Ptr,                                                     \
                               counterDescription_Ptr)                                              \
 {                                                                                                  \
     flouka_assignCounter((g_flouka_Ptr),                                                           \
                          (counterID),                                                              \
+                         (groupID),                                                                \
                          (unit_Ptr),                                                               \
                          (counterName_Ptr),                                                        \
                          (counterDescription_Ptr) COMMA()                                          \
