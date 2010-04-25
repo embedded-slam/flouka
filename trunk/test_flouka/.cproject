@@ -27,7 +27,7 @@
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.2067960119" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 <option id="gnu.c.compiler.option.include.paths.756403612" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/flouka/include}&quot;"/>
+<listOptionValue builtIn="false" value="../../flouka/include"/>
 </option>
 <option id="gnu.c.compiler.option.preprocessor.def.symbols.1295575431" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 <listOptionValue builtIn="false" value="DEBUG"/>
@@ -41,7 +41,7 @@
 <listOptionValue builtIn="false" value="flouka"/>
 </option>
 <option id="gnu.c.link.option.paths.1377418456" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/flouka/build}&quot;"/>
+<listOptionValue builtIn="false" value="../../flouka/build"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1164570007" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
