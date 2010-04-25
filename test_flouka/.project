@@ -3,7 +3,6 @@
 	<name>test_flouka</name>
 	<comment></comment>
 	<projects>
-		<project>flouka</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
