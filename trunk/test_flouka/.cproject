@@ -34,6 +34,9 @@
 </option>
 <option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.825988281" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.option.debugging.level.622550627" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.1802303258" superClass="gnu.c.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.error.1056551455" superClass="gnu.c.compiler.option.warnings.pedantic.error" value="true" valueType="boolean"/>
+<option id="gnu.c.compiler.option.warnings.toerrors.670438351" superClass="gnu.c.compiler.option.warnings.toerrors" value="true" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.392866467" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.base.33250493" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base">
