@@ -2,7 +2,7 @@
  *
  * flouka - a library for embedded statistics collection.
  *
- * Copyright © 2009  Mohamed Galal El-Din, Karim Emad Morsy.
+ * Copyright ï¿½ 2009  Mohamed Galal El-Din, Karim Emad Morsy.
  *
  ***************************************************************************************************
  *
@@ -47,7 +47,12 @@
  **************************************************************************************************/
 
 /*This macro is used to verify that the statistics collector is initialized properly.*/
-#define FLOUKA_INITIALIZATION_PATTEREN    0x12341234
+#define FLOUKA_INITIALIZATION_PATTEREN    (0x12341234)
+
+#define FLOUKA_COUNTER_MAXIMUM_VALUE      (0xFFFFFFFFLU)
+#define FLOUKA_COUNTER_MINIMUM_VALUE      (0x0LU)
+
+
 /**************************************************************************************************/
 #define FLOUKA_ENCODE_PARAMETER(dest_Ptr, param)                                                   \
 {                                                                                                  \
@@ -98,7 +103,7 @@ typedef struct flouka_StatisticsGroupInfo
     const char* groupDescription_Ptr;
 #ifdef DEBUG
     /*Indicates whether the group has been assigned or not*/
-    bool_t isAssigned;
+    bool isAssigned;
 #endif /*DEBUG*/
 } flouka_StatisticsGroupInfo_s;
 
@@ -122,7 +127,7 @@ typedef struct flouka_StatisticsSubGroupInfo
     const char* subgroupDescription_Ptr;
 #ifdef DEBUG
     /*Indicates whether the group has been assigned or not*/
-    bool_t isAssigned;
+    bool isAssigned;
 #endif /*DEBUG*/
 } flouka_StatisticsSubGroupInfo_s;
 
@@ -148,7 +153,7 @@ typedef struct flouka_StatisticsCounterInfo
     const char* counterDescription_Ptr;
 #ifdef DEBUG
     /*Indicates whether the counter has been assigned or not*/
-    bool_t isAssigned;
+    bool isAssigned;
 #endif /*DEBUG*/
 } flouka_StatisticsCounterInfo_s;
 
@@ -975,7 +980,7 @@ INLINE void flouka_incrementCounter(flouka_s* flouka_Ptr,
                     "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
-    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] + 1) < UINT32_MAX),
+    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] + 1) < FLOUKA_COUNTER_MAXIMUM_VALUE),
                     "FLOUKA:  Counter reached the maximum possible value and will wrap around, comment this line if that is OK",
                     fileName,
                     lineNumber);
@@ -1011,7 +1016,7 @@ INLINE void flouka_decrementCounter(flouka_s*   flouka_Ptr,
                     "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
-    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] - 1) > UINT32_MIN),
+    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] - 1) > FLOUKA_COUNTER_MINIMUM_VALUE),
                     "FLOUKA:  Counter reached the minimum possible value and will wrap around, comment this line if that is OK",
                     fileName,
                     lineNumber);
@@ -1048,7 +1053,7 @@ INLINE void flouka_increaseCounter(flouka_s*    flouka_Ptr,
                     "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
-    ASSERT(((UINT32_MAX - flouka_Ptr->counterValuesList_Ptr[counterID])> delta),
+    ASSERT(((FLOUKA_COUNTER_MAXIMUM_VALUE - flouka_Ptr->counterValuesList_Ptr[counterID])> delta),
                     "FLOUKA:  Overflow occurred and counter will wrap around, comment this line if that is OK",
                     fileName,
                     lineNumber);
@@ -1085,7 +1090,7 @@ INLINE void flouka_decreaseCounter(flouka_s*    flouka_Ptr,
                     "FLOUKA:  CounterID is not assigned yet",
                     fileName,
                     lineNumber);
-    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] - UINT32_MIN)> delta),
+    ASSERT(((flouka_Ptr->counterValuesList_Ptr[counterID] - FLOUKA_COUNTER_MINIMUM_VALUE)> delta),
                     "FLOUKA:  Underflow occurred and counter will wrap around, comment this line if that is OK",
                     fileName,
                     lineNumber);
@@ -1157,7 +1162,7 @@ INLINE void flouka_resetCounter(flouka_s* flouka_Ptr,
      * ============================
      * 1. Reset the counter.
      */
-    flouka_Ptr->counterValuesList_Ptr[counterID] = UINT32_MIN;
+    flouka_Ptr->counterValuesList_Ptr[counterID] = FLOUKA_COUNTER_MINIMUM_VALUE;
 }
 
 INLINE uint32 flouka_getCounter(flouka_s* flouka_Ptr,
