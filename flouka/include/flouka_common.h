@@ -1,29 +1,30 @@
 /***************************************************************************************************
  *
- * flouka - one_liner_project_description.
+ * flouka - a library for embedded statistics collection.
  *
- * Copyright © 2009  comma_separated_copy_right_holder_list.
+ * Copyright © 2009  Mohamed Galal El-Din, Karim Emad Morsy.
  *
  ***************************************************************************************************
  *
  * This file is part of flouka library.
  *
- * flouka is free software: you can redistribute it and/or modify it under
- * the terms of the GNU <Lesser >General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or any later version.
+ * flouka is free software: you can redistribute it and/or modify it under the terms of the GNU
+ * Lesser General Public License as published by the Free Software Foundation, either version 3 of
+ * the License, or any later version.
  *
- * flouka is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU <Lesser >General Public License for more details.
+ * flouka is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU <Lesser >General Public License along
- * with flouka. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with flouka. If
+ * not, see <http://www.gnu.org/licenses/>.
  *
  ***************************************************************************************************
  *
  * For more information, questions, or inquiries please contact:
  *
- * author_name: author_email
+ * Mohamed Galal El-Din:    mohamed.g.ebrahim@gmail.com
+ * Karim Emad Morsy:        karim.e.morsy@gmail.com
  *
  **************************************************************************************************/
 #ifndef FLOUKA_COMMON_H_
