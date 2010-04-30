@@ -19,7 +19,7 @@
 <folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.988545237." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.base.1493115357" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
 <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.1372399588" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-<builder buildPath="${workspace_loc:/test_flouka/build}" id="cdt.managedbuild.target.gnu.builder.base.900494461" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" stopOnErr="false" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+<builder buildPath="${workspace_loc:/test_flouka/build}" id="cdt.managedbuild.target.gnu.builder.base.900494461" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" stopOnErr="false" superClass="cdt.managedbuild.target.gnu.builder.base"/>
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.1715549321" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1997474101" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 <option id="gnu.cpp.compiler.option.optimization.level.415811673" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
@@ -34,9 +34,9 @@
 </option>
 <option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.825988281" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.option.debugging.level.622550627" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
-<option id="gnu.c.compiler.option.warnings.pedantic.1802303258" superClass="gnu.c.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
-<option id="gnu.c.compiler.option.warnings.pedantic.error.1056551455" superClass="gnu.c.compiler.option.warnings.pedantic.error" value="true" valueType="boolean"/>
-<option id="gnu.c.compiler.option.warnings.toerrors.670438351" superClass="gnu.c.compiler.option.warnings.toerrors" value="true" valueType="boolean"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.1802303258" name="Pedantic (-pedantic)" superClass="gnu.c.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.error.1056551455" name="Pedantic warnings as errors (-pedantic-errors)" superClass="gnu.c.compiler.option.warnings.pedantic.error" value="true" valueType="boolean"/>
+<option id="gnu.c.compiler.option.warnings.toerrors.670438351" name="Warnings as errors (-Werror)" superClass="gnu.c.compiler.option.warnings.toerrors" value="true" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.392866467" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.base.33250493" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base">
