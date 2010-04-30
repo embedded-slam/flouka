@@ -1,6 +1,8 @@
 CC=gcc
-CFLAGS=-c -Wall
-LDFLAGS= -L../flouka/lib -lflouka
+AR=ar
+RM= rm -rf
+CFLAGS= -DDEBUG -O0 -g3 -pedantic -pedantic-errors -Wall -Werror -I../flouka -c
+LDFLAGS= -L../flouka -lflouka
 SOURCES=main.c 
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=test_flouka
@@ -8,8 +10,7 @@ EXECUTABLE=test_flouka
 all: $(SOURCES) $(EXECUTABLE)
 	
 $(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) -o $(EXECUTABLE) $(OBJECTS) $(LDFLAGS) 
 
-.c.o:
-	$(CC) $(CFLAGS) $< -o $@
-
+clean:
+	$(RM) *.o *.a *.d $(EXECUTABLE)
